@@ -1,0 +1,19 @@
+version: '3.4'
+services: 
+  db:
+    container_name: opensips-db
+    restart: always
+    image: mysql:5.7
+    environment:
+        MYSQL_ROOT_PASSWORD: 'opensipsapi'
+        MYSQL_DATABASE: 'opensips'
+        MYSQL_USER: 'spring'
+        MYSQL_PASSWORD: 'spring'
+    volumes:
+        - ./scripts:/docker-entrypoint-initdb.d
+        - /tmp/:/var/run/mysqld/
+        - ./mysql-data:/var/lib/mysql/
+    #expose:
+    #  - '3306'
+    ports:
+      - '3306:3306'
